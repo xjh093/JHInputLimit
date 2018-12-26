@@ -1,11 +1,13 @@
 # JHInputLimit
-输入限制，长度限制，类型限制，自定义字符限制
+input limit, length limit, type limit, custom character limit
+- 输入限制，长度限制，类型限制，自定义字符限制
 
 ---
 
-# What is it?
+# What
 
 input limit for 'UITextField' and 'UITextView'
+- `UITextField` 与 `UITextView` 的输入限制
 
 input limit:
 - input length
@@ -14,7 +16,7 @@ input limit:
 
 ---
 
-# USE
+# Usage
 
 ```
     _textView.jh_inputLimit.length = 9;

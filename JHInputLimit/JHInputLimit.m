@@ -70,60 +70,62 @@
 
 - (NSString *)handleText:(NSString *)text{
     NSString *outputString;
-    if (_length > 0) {
-        if (_type == JHInputLimitType_None) {
-            if (text.length > _length) {
-                outputString = [text substringToIndex:[text rangeOfComposedCharacterSequenceAtIndex:_length].location];
-            }else{
-                outputString = text;
-            }
+    if (_length > 0 && _type == JHInputLimitType_None) {
+        if (text.length > _length) {
+            outputString = [text substringToIndex:[text rangeOfComposedCharacterSequenceAtIndex:_length].location];
         }else{
+            outputString = text;
+        }
+    }else{
+        
+        NSMutableString *mString = @"".mutableCopy;
+        for (int i = 0; i < text.length; i++) {
+            NSRange range = [text rangeOfComposedCharacterSequenceAtIndex:i];
+            unichar c = [text characterAtIndex:range.location];
             
-            NSMutableString *mString = @"".mutableCopy;
-            for (int i = 0; i < text.length; i++) {
-                NSRange range = [text rangeOfComposedCharacterSequenceAtIndex:i];
-                unichar c = [text characterAtIndex:range.location];
-                
-                if (_type & JHInputLimitType_Alphabet) {
-                    if ((c >= 'A' && c <= 'Z') ||
-                        (c >= 'a' && c <= 'z')) {
-                        [mString appendFormat:@"%c",c];
-                    }
+            if (_type & JHInputLimitType_Alphabet) {
+                if ((c >= 'A' && c <= 'Z') ||
+                    (c >= 'a' && c <= 'z')) {
+                    [mString appendFormat:@"%c",c];
                 }
-                if (_type & JHInputLimitType_Digital) {
-                    if ((c >= '0' && c <= '9')) {
-                        [mString appendFormat:@"%c",c];
-                    }
+            }
+            if (_type & JHInputLimitType_Digital) {
+                if ((c >= '0' && c <= '9')) {
+                    [mString appendFormat:@"%c",c];
                 }
-                if (_type & JHInputLimitType_Alphabet_Upper) {
-                    if ((c >= 'A' && c <= 'Z')) {
-                        [mString appendFormat:@"%c",c];
-                    }
+            }
+            if (_type & JHInputLimitType_Alphabet_Upper) {
+                if ((c >= 'A' && c <= 'Z')) {
+                    [mString appendFormat:@"%c",c];
                 }
-                if (_type & JHInputLimitType_Alphabet_Lower) {
-                    if ((c >= 'a' && c <= 'z')) {
-                        [mString appendFormat:@"%c",c];
-                    }
+            }
+            if (_type & JHInputLimitType_Alphabet_Lower) {
+                if ((c >= 'a' && c <= 'z')) {
+                    [mString appendFormat:@"%c",c];
                 }
-                if (_type & JHInputLimitType_Chinese) {
-                    if ((c >= 0x4E00 && c <= 0x9FA5)) {
-                        [mString appendFormat:@"%@",[NSString stringWithCharacters:&c length:range.length]];
-                    }
+            }
+            if (_type & JHInputLimitType_Chinese) {
+                if ((c >= 0x4E00 && c <= 0x9FA5)) {
+                    [mString appendFormat:@"%@",[NSString stringWithCharacters:&c length:range.length]];
                 }
-                if ((_type & JHInputLimitType_MyCharacters) &&
-                    _myCharacter.count > 0) {
-                    NSString *s = [NSString stringWithCharacters:&c length:range.length];
-                    if ([_myCharacter containsObject:s]) {
-                        [mString appendFormat:@"%@",s];
-                    }
+            }
+            if ((_type & JHInputLimitType_MyCharacters) &&
+                _myCharacter.count > 0) {
+                NSString *s = [NSString stringWithCharacters:&c length:range.length];
+                if ([_myCharacter containsObject:s]) {
+                    [mString appendFormat:@"%@",s];
                 }
-                
+            }
+            
+            if (_length > 0) {
                 if (mString.length < _length) {
                     outputString = mString;
                 }else if (mString.length == _length) {
                     outputString = mString;
                     break;
                 }
+            }else{
+                outputString = mString;
             }
         }
     }

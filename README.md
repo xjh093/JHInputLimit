@@ -16,6 +16,16 @@ input limit:
 
 ---
 
+# Usage
+
+```
+    _textView.jh_inputLimit.length = 9;
+    _textView.jh_inputLimit.type = JHInputLimitType_Alphabet | JHInputLimitType_Digital | JHInputLimitType_MyCharacters;
+    _textView.jh_inputLimit.myCharacter = [NSSet setWithArray:@[@"!",@","]];
+```
+
+---
+
 # Logs
 #### 2019-12-20
 - add text change block.
@@ -28,16 +38,6 @@ input limit:
 
 #### 2018-09-04
 - upload.
-
----
-
-# Usage
-
-```
-    _textView.jh_inputLimit.length = 9;
-    _textView.jh_inputLimit.type = JHInputLimitType_Alphabet | JHInputLimitType_Digital | JHInputLimitType_MyCharacters;
-    _textView.jh_inputLimit.myCharacter = [NSSet setWithArray:@[@"!",@","]];
-```
 
 ---
 

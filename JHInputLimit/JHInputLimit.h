@@ -28,6 +28,12 @@
 //  SOFTWARE.
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+@class JHInputLimit;
+
+typedef void(^JHInputLimitTextFieldDidChangeText)(JHInputLimit *inputLimit, UITextField *textField);
+typedef void(^JHInputLimitTextViewDidChangeText)(JHInputLimit *inputLimit, UITextView *textView);
 
 typedef NS_OPTIONS(NSUInteger, JHInputLimitType) {
     JHInputLimitType_None           = 0,        /* 任何字符*/
@@ -49,5 +55,11 @@ typedef NS_OPTIONS(NSUInteger, JHInputLimitType) {
 
 /** Customt characters, the 'type' should contain 'JHInputLimitType_MyCharacters'.*/
 @property (nonatomic,  strong) NSSet *myCharacter;
+
+/** textField'text change block.*/
+@property (nonatomic,    copy) JHInputLimitTextFieldDidChangeText textFieldDidChangeTextBlock;
+
+/** textView'text change block.*/
+@property (nonatomic,    copy) JHInputLimitTextViewDidChangeText textViewDidChangeTextBlock;
 
 @end

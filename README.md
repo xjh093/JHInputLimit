@@ -16,6 +16,21 @@ input limit:
 
 ---
 
+# Logs
+#### 2019-12-20
+- add text change block.
+
+#### 2019-01-07
+- fix bug.
+
+#### 2018-09-29
+- update.
+
+#### 2018-09-04
+- upload.
+
+---
+
 # Usage
 
 ```

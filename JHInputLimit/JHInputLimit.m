@@ -57,6 +57,10 @@
     UITextField *textField = (UITextField *)noti.object;
     if (textField == _textField) {
         _textField.text = [self handleText:textField.text];
+        
+        if (_textFieldDidChangeTextBlock) {
+            _textFieldDidChangeTextBlock(self, _textField);
+        }
     }
 }
 
@@ -65,11 +69,16 @@
     UITextView *textView = (UITextView *)noti.object;
     if (textView == _textView) {
         _textView.text = [self handleText:textView.text];
+        
+        if (_textViewDidChangeTextBlock) {
+            _textViewDidChangeTextBlock(self, _textView);
+        }
     }
 }
 
 - (NSString *)handleText:(NSString *)text{
     NSString *outputString;
+    
     if (_length > 0 && _type == JHInputLimitType_None) {
         if (text.length > _length) {
             outputString = [text substringToIndex:[text rangeOfComposedCharacterSequenceAtIndex:_length].location];

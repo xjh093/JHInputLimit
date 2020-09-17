@@ -32,6 +32,8 @@
 @interface JHInputLimit()
 @property (nonatomic,    weak) UITextField *textField;
 @property (nonatomic,    weak) UITextView *textView;
+
+@property (nonatomic,    copy) NSString *originText;
 @end
 
 @implementation JHInputLimit
@@ -56,7 +58,8 @@
 {
     UITextField *textField = (UITextField *)noti.object;
     if (textField == _textField) {
-        _textField.text = [self handleText:textField.text];
+        _originText = textField.text;
+        _textField.text = [self handleText:_originText];
         
         if (_textFieldDidChangeTextBlock) {
             _textFieldDidChangeTextBlock(self, _textField);
@@ -68,7 +71,8 @@
 {
     UITextView *textView = (UITextView *)noti.object;
     if (textView == _textView) {
-        _textView.text = [self handleText:textView.text];
+        _originText = textView.text;
+        _textView.text = [self handleText:_originText];
         
         if (_textViewDidChangeTextBlock) {
             _textViewDidChangeTextBlock(self, _textView);

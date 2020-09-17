@@ -65,4 +65,7 @@ typedef NS_OPTIONS(NSUInteger, JHInputLimitType) {
 /** input text */
 @property (nonatomic,    copy,   readonly) NSString *originText;
 
+/** store text that match your `rule` */
+@property (nonatomic,    copy) NSString *macthText;
+
 @end

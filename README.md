@@ -27,6 +27,9 @@ input limit:
 ---
 
 # Logs
+#### 2020-09-17
+- add `originText` and `macthText`.
+
 #### 2019-12-20
 - add text change block.
 
@@ -64,6 +67,18 @@ typedef NS_OPTIONS(NSUInteger, JHInputLimitType) {
 
 /** Customt characters, the 'type' should contain 'JHInputLimitType_MyCharacters'.*/
 @property (nonatomic,  strong) NSSet *myCharacter;
+
+/** textField'text change block.*/
+@property (nonatomic,    copy) JHInputLimitTextFieldDidChangeText textFieldDidChangeTextBlock;
+
+/** textView'text change block.*/
+@property (nonatomic,    copy) JHInputLimitTextViewDidChangeText textViewDidChangeTextBlock;
+
+/** input text */
+@property (nonatomic,    copy,   readonly) NSString *originText;
+
+/** store text that match your `rule` */
+@property (nonatomic,    copy) NSString *macthText;
 
 @end
 ```

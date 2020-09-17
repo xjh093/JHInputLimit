@@ -28,7 +28,7 @@ input limit:
 
 # Logs
 #### 2020-09-17
-- add `originText` and `macthText`.
+- add `originText` and `matchText`.
 
 #### 2019-12-20
 - add text change block.
@@ -78,7 +78,7 @@ typedef NS_OPTIONS(NSUInteger, JHInputLimitType) {
 @property (nonatomic,    copy,   readonly) NSString *originText;
 
 /** store text that match your `rule` */
-@property (nonatomic,    copy) NSString *macthText;
+@property (nonatomic,    copy) NSString *matchText;
 
 @end
 ```

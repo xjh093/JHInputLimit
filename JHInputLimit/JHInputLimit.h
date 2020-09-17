@@ -62,4 +62,7 @@ typedef NS_OPTIONS(NSUInteger, JHInputLimitType) {
 /** textView'text change block.*/
 @property (nonatomic,    copy) JHInputLimitTextViewDidChangeText textViewDidChangeTextBlock;
 
+/** input text */
+@property (nonatomic,    copy,   readonly) NSString *originText;
+
 @end

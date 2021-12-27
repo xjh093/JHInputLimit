@@ -59,7 +59,8 @@
     UITextField *textField = (UITextField *)noti.object;
     if (textField == _textField) {
         _originText = textField.text;
-        _textField.text = [self handleText:_originText];
+
+        [self shouldHandleText:textView type:1];
         
         if (_textFieldDidChangeTextBlock) {
             _textFieldDidChangeTextBlock(self, _textField);
@@ -72,10 +73,38 @@
     UITextView *textView = (UITextView *)noti.object;
     if (textView == _textView) {
         _originText = textView.text;
-        _textView.text = [self handleText:_originText];
+
+        [self shouldHandleText:textField type:2];
         
         if (_textViewDidChangeTextBlock) {
             _textViewDidChangeTextBlock(self, _textView);
+        }
+    }
+}
+
+- (void)shouldHandleText:(id<UITextInput>)input type:(NSInteger)type
+{
+    BOOL work = YES;
+    // 当前语言
+    NSString *language = [[UIApplication sharedApplication] textInputMode].primaryLanguage;
+    // 系统自带的中文输入法
+    if ([language isEqualToString:@"zh-Hans"]) {
+        // 获取高亮部分
+        UITextPosition *position = [input positionFromPosition:input.markedTextRange.start offset:0];
+        // 有高亮选择的文字时，不进行处理
+        if (position) {
+            work = NO;
+        }
+    }
+    
+    if (work) {
+        NSString *text = [self handleText:_originText];
+        if (![_originText isEqualToString:text]) {
+            if (type == 1) {
+                _textField.text = text;
+            }else if (type == 2) {
+                _textView.text = text;
+            }
         }
     }
 }

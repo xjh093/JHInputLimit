@@ -27,6 +27,9 @@ input limit:
 ---
 
 # Logs
+#### 2021-12-27
+- 处理系统自带的中文输入法
+
 #### 2020-09-17
 - add `originText` and `matchText`.
 
